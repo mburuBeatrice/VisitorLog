@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{%load bootstrap4%}
+{% block content%}
+{{block.super}}
+<h1>Add Visitor</h1>
+<form action="" method = "POST" enctype="multipart/form-data">{% csrf_token %}
+    {{ form.as_p}}
+
+    <input type="submit" value = "add a visitor" />
+
+</form>
+{% endblock%}
