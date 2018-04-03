@@ -1,17 +1,59 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>mgeni</title>
-</head>
-<body>
-    <h4>Visitor List</h4>
-    {% for mgeni in mgeni%}
-    <p>{{mgeni.name}}</p>
-    <p>{{mgeni.id}}</p>
-   
-    {%endfor%}
-</body>
-</html>
+{% extends 'base.html'%}
+{% load bootstrap4 %}
+{% block content%}
+{{block.super}}
+<h2 id="testingcss">TEST</h2>
+
+<div class= "container">
+
+<div class="table-responsive-sm">
+      
+         
+        <table class="table table-hover ">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>ID</th>
+              <th></th>
+             
+            </tr>
+          </thead>
+           
+        {% for mgeni in mgeni%}
+          <tbody>
+            <tr>
+              <td>{{mgeni.name}}</td>
+              <td>{{mgeni.id}}</td>
+                <td><a href="{{mgeni.get_absolute_url}}">View</a></td>
+            </tr>
+          
+        
+          </tbody>
+          {%endfor%}
+        </table>
+      </div>
+    </div><button type="button" class="btn btn-outline-warning" style="margin-left:90px; margin-bottom:30px;"><a href="/create">Add a visitor</a></button>
+    <!-- <a href="/create">Add</a> -->
+<div class="pagination" style="margin-left:90px;">
+        <span class="step-links">
+        <ul class="pagination">
+            {% if mgeni.has_previous %}
+                <li class="page-item"><a class="page-link" href="?page=1">&laquo; first</a></li>
+                <li class="page-item"><a class="page-link" href="?page={{ mgeni.previous_page_number }}">previous</a></li>
+            {% endif %}
+    
+            <!-- <li class="current">
+              Page {{ mgeni.number }} of {{ mgeni.paginator.num_pages }}.
+            </li>
+           -->
+            {% if mgeni.has_next %}
+            
+                <li class="page-item"><a class="page-link" href="?page={{ mgeni.next_page_number }}">1</a></li>
+                <li class="page-item"><a class="page-link" href="?page={{ mgeni.paginator.num_pages }}">2 &raquo;</a></li>
+            {% endif %}
+        </ul>
+        </span>
+    </div>
+{% endblock%}
+
+
