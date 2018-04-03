@@ -1,0 +1,43 @@
+{% extends 'base.html'%}
+{% load bootstrap4 %}
+{% block content%}
+{{block.super}}
+<!-- <section>
+    
+  
+    <p>{{instance.name}}</p></br>
+    <p>{{instance.id}}</p>
+    <a href="/update/">Update</a>
+    <a href="/delete/">Delete</a>
+</section> -->
+<div class= "container">
+
+        <div class="table-responsive-sm">
+              
+                 
+                <table class="table table-hover ">
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>ID</th>
+                      <th></th>
+                      <th></th>
+                     
+                    </tr>
+                  </thead>
+            
+                  <tbody>
+                    <tr>
+                      <td>{{instance.name}}</td>
+                      <td>{{instance.id}}</td>
+                      <td><a href="{% url 'visitor:update' instance.id %}">Update</a></td>
+                      <td><a href="{% url 'visitor:delete' instance.id %}">Delete</a></td>
+                    </tr>
+                  
+                
+                  </tbody>
+              
+                </table>
+              </div>
+
+{% endblock%}
