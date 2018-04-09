@@ -5,8 +5,35 @@ from django.shortcuts import render,get_object_or_404,redirect
 from django.db.models import Q
 from .models import Visitor
 from .forms import VisitorForm
+from django.views.generic import View
+from io import BytesIO
+from django.http import HttpResponse
+from django.views.generic import View
+from mgeni.utils import render_to_pdf 
+from django.template.loader import get_template
 
-# Create your views here.
+class GeneratePdf(View):
+    def get(self, request, *args, **kwargs):
+         template = get_template('pdf/invoice.html')
+         context = {
+             "invoice_id": 123,
+             "customer_name": "John Cooper",
+             "amount": 1399.99,
+             "today": "Today",
+         }
+         html = template.render(context)
+         pdf = render_to_pdf('pdf/invoice.html', context)
+         if pdf:
+             response = HttpResponse(pdf, content_type='application/pdf')
+             filename = "Invoice_%s.pdf" %("12341231")
+             content = "inline; filename='%s'" %(filename)
+             download = request.GET.get("download")
+             if download:
+                 content = "attachment; filename='%s'" %(filename)
+             response['Content-Disposition'] = content
+             return response
+         return HttpResponse("Not found")
+
 def index(request):
     mgeni_list = Visitor.objects.all()
     page = request.GET.get('page', 1)
@@ -25,6 +52,7 @@ def index(request):
         mgeni = paginator.page(1)
     except EmptyPage:
         mgeni = paginator.page(paginator.num_pages)
+
     context ={
         "mgeni": mgeni 
     }

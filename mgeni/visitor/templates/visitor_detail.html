@@ -22,6 +22,7 @@
                       <th>ID</th>
                       <th></th>
                       <th></th>
+                      <th></th>
                      
                     </tr>
                   </thead>
@@ -32,6 +33,7 @@
                       <td>{{instance.id}}</td>
                       <td><a href="{% url 'visitor:update' instance.id %}">Update</a></td>
                       <td><a href="{% url 'visitor:delete' instance.id %}">Delete</a></td>
+                      <td><a href="/pdf">Print PDF</a></td>
                     </tr>
                   
                 

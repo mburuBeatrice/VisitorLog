@@ -16,8 +16,10 @@ Including another URLconf
 from django.conf.urls import url,include
 from django.contrib import admin
 from django.contrib.auth import views
-
+from visitor.views import GeneratePdf
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'',include('visitor.urls', namespace='visitor')),
+    url(r'^pdf/$', GeneratePdf.as_view(),)
+  
 ]

@@ -14,7 +14,7 @@
             <tr>
               <th>Name</th>
               <th>ID</th>
-              <th></th>
+            
              
             </tr>
           </thead>
@@ -22,9 +22,9 @@
         {% for mgeni in mgeni%}
           <tbody>
             <tr>
-              <td>{{mgeni.name}}</td>
+              <td><a href="{{mgeni.get_absolute_url}}">{{mgeni.name}}</a></td>
               <td>{{mgeni.id}}</td>
-                <td><a href="{{mgeni.get_absolute_url}}">View</a></td>
+                <!-- <td><a href="{{mgeni.get_absolute_url}}">View</a></td> -->
             </tr>
           
         
@@ -33,6 +33,7 @@
         </table>
       </div>
     </div><button type="button" class="btn btn-outline-warning" style="margin-left:90px; margin-bottom:30px;"><a href="/create">Add a visitor</a></button>
+  </div><button type="button" class="btn btn-outline-warning" style="margin-left:90px; margin-bottom:30px;"><a href="/pdf">Print PDF</a></button>
     <!-- <a href="/create">Add</a> -->
 <div class="pagination" style="margin-left:90px;">
         <span class="step-links">

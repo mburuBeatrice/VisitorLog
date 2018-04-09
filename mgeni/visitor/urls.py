@@ -10,6 +10,8 @@ urlpatterns=[
     url(r'^(?P<id>\d+)/$',views.detail,name='detail'),
     url(r'^(?P<id>\d+)/update$',views.update,name='update'),
     url(r'^(?P<id>\d+)/delete$',views.delete,name='delete'),
+   
+    
 ]
 
 

@@ -4,6 +4,8 @@ from django.core.urlresolvers import reverse
 # Create your models here.
 class Visitor(models.Model):
     name = models.CharField(max_length=40)
+    gender = models.CharField(max_length=40,null=True,blank=True)
+    age = models.IntegerField(null=True,blank=True)
 
     def __str__(self):
         return self.name
@@ -24,3 +26,7 @@ class Visitor(models.Model):
     def search(cls,search_term):
         visitor_search = cls.objects.filter(name__name__icontains=search_term)
         return visitor_search
+
+class County(models.Model):
+    name = models.CharField(max_length=40)
+    code = models.IntegerField()
