@@ -2,14 +2,7 @@
 {% load bootstrap4 %}
 {% block content%}
 {{block.super}}
-<!-- <section>
-    
-  
-    <p>{{instance.name}}</p></br>
-    <p>{{instance.id}}</p>
-    <a href="/update/">Update</a>
-    <a href="/delete/">Delete</a>
-</section> -->
+
 <div class= "container">
 
         <div class="table-responsive-sm">
@@ -20,9 +13,7 @@
                     <tr>
                       <th>Name</th>
                       <th>ID</th>
-                      <th>GENDER</th>
-                      <th>AGE</th>
-                      <th>COUNTY</th>
+                      <th>CODE</th>
                       <th></th>
                       <th></th>
                       <th></th>
@@ -32,13 +23,11 @@
             
                   <tbody>
                     <tr>
-                      <td>{{instance.name}}</td>
-                      <td>{{instance.id}}</td>
-                      <td>{{instance.gender}}</td>
-                      <td>{{instance.age}}</td>
-                      <td>{{instance.county}}</td>
-                      <td><a href="{% url 'visitor:update' instance.id %}">Update</a></td>
-                      <td><a href="{% url 'visitor:delete' instance.id %}">Delete</a></td>
+                      <td>{{inst.name}}</td>
+                      <td>{{inst.id}}</td>
+                      <td>{{inst.code}}</td>
+                      <td><a href="{% url 'visitor:county_update' inst.id %}">Update</a></td>
+                      <td><a href="{% url 'visitor:county_delete' inst.id %}">Delete</a></td>
                       <td><a href="/pdf">Print PDF</a></td>
                     </tr>
                   

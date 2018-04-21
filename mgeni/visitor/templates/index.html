@@ -2,8 +2,45 @@
 {% load bootstrap4 %}
 {% block content%}
 {{block.super}}
-<h2 id="testingcss">TEST</h2>
+<!-- <h2 id="testingcss">TEST</h2> -->
+<!-- <div class="container" style="margin-bottom:30px;"> 
+<img src="https://cdn-images-1.medium.com/max/2000/1*U7bUSedRNGbLK33bd-VVCA.jpeg"  style= "width:100%;height: auto;"alt="background">
+</div>
+<div class="container">
+  <div class="container" style="position:center;">
+      <p>About the company</p>
+      <p>Key features of the company</p>
+  </div>
+ 
+  <div class="row">
+    <div class="col-sm-3">
+        <i class="fa fa-desktop " style="font-size:36px ;margin-bottom:20px;"></i>
+      <h4>Responsive</h4>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore.
+    </div>
+    <div class="col-sm-3">
+        <i class="fa fa-heart" style="font-size:36px ;margin-bottom:20px;"></i>
+      <h4>Passion</h4>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore.
+      
+      </div>
+      <div class="col-sm-3">
+          <i class="fa fa-diamond" style="font-size:36px ;margin-bottom:20px;"></i>
+        <h4>Design</h4>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore.
 
+        </div>
+        <div class="col-sm-3">
+
+        <i class="fa fa-cog" style="font-size:36px ;margin-bottom:20px;"></i>
+          <h4>Support</h4>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore.
+
+          </div>
+
+  </div>
+
+</div> -->
 <div class= "container">
 
 <div class="table-responsive-sm">
@@ -14,6 +51,10 @@
             <tr>
               <th>Name</th>
               <th>ID</th>
+              <th>GENDER</th>
+              <th>COUNTY</th>
+              <!-- <th>ARRIVAL</th>
+              <th>DEPARTURE</th> -->
             
              
             </tr>
@@ -25,6 +66,10 @@
               <td><a href="{{mgeni.get_absolute_url}}">{{mgeni.name}}</a></td>
               <td>{{mgeni.id}}</td>
                 <!-- <td><a href="{{mgeni.get_absolute_url}}">View</a></td> -->
+                <td>{{mgeni.gender}}</td>
+                <td>{{mgeni.county}}</td>
+                <!-- <td>{{mgeni.arrival}}</td>
+                <td>{{mgeni.departure}}</td> -->
             </tr>
           
         
@@ -33,6 +78,7 @@
         </table>
       </div>
     </div><button type="button" class="btn btn-outline-warning" style="margin-left:90px; margin-bottom:30px;"><a href="/create">Add a visitor</a></button>
+  <!-- </div><button type="button" class="btn btn-outline-warning" style="margin-left:90px; margin-bottom:30px;"><a href=" ">Add a county</a></button> -->
   </div><button type="button" class="btn btn-outline-warning" style="margin-left:90px; margin-bottom:30px;"><a href="/pdf">Print PDF</a></button>
     <!-- <a href="/create">Add</a> -->
 <div class="pagination" style="margin-left:90px;">

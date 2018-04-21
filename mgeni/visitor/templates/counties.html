@@ -1,0 +1,58 @@
+{% extends 'base.html'%}
+{% load bootstrap4 %}
+{% block content%}
+{{block.super}}
+
+<div class= "container">
+
+<div class="table-responsive-sm">
+      
+         
+        <table class="table table-hover ">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>ID</th>
+              <th>CODE</th>
+            
+             
+            </tr>
+          </thead>
+           
+        {% for county in county%}
+          <tbody>
+            <tr>
+              <td><a href="{{county.get_absolute_url}}">{{county.name}}</a></td>
+              <td>{{county.id}}</td>
+              <td>{{county.code}}</td>
+            
+            </tr>
+          
+        
+          </tbody>
+          {%endfor%}
+        </table>
+      </div>
+    </div><button type="button" class="btn btn-outline-warning" style="margin-left:90px; margin-bottom:30px;"><a href="/county_create">Add a county</a></button>
+  </div><button type="button" class="btn btn-outline-warning" style="margin-left:90px; margin-bottom:30px;"><a href="/pdf">Print PDF</a></button>
+
+<div class="pagination" style="margin-left:90px;">
+        <span class="step-links">
+        <ul class="pagination">
+            {% if county.has_previous %}
+                <li class="page-item"><a class="page-link" href="?page=1">&laquo; first</a></li>
+                <li class="page-item"><a class="page-link" href="?page={{ county.previous_page_number }}">previous</a></li>
+            {% endif %}
+    
+        
+            {% if county.has_next %}
+            
+                <li class="page-item"><a class="page-link" href="?page={{ county.next_page_number }}">1</a></li>
+                <li class="page-item"><a class="page-link" href="?page={{ county.paginator.num_pages }}">2 &raquo;</a></li>
+            {% endif %}
+        </ul>
+        </span>
+    </div>
+{% endblock%}
+
+

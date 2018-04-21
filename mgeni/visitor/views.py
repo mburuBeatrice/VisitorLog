@@ -3,8 +3,8 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.http import HttpResponse,Http404,HttpResponseRedirect
 from django.shortcuts import render,get_object_or_404,redirect
 from django.db.models import Q
-from .models import Visitor
-from .forms import VisitorForm
+from .models import Visitor,County
+from .forms import VisitorForm,CountyForm
 from django.views.generic import View
 from io import BytesIO
 from django.http import HttpResponse
@@ -34,9 +34,13 @@ class GeneratePdf(View):
              return response
          return HttpResponse("Not found")
 
+def mainpage(request):
+
+    return render(request, 'main.html')
+
 def index(request):
     mgeni_list = Visitor.objects.all()
-    page = request.GET.get('page', 1)
+    page = request.GET.get('page', 4)
 
     query = request.GET.get("q")
     if query:
@@ -45,11 +49,11 @@ def index(request):
             Q(id__icontains=query)
             ).distinct()
 
-    paginator = Paginator(mgeni_list, 1)
+    paginator = Paginator(mgeni_list, 4)
     try:
         mgeni = paginator.page(page)
     except PageNotAnInteger:
-        mgeni = paginator.page(1)
+        mgeni = paginator.page(4)
     except EmptyPage:
         mgeni = paginator.page(paginator.num_pages)
 
@@ -113,5 +117,162 @@ def delete(request, id=None):
     instance.delete()
     messages.success(request, "Visitor Deleted")
     return render(request, 'index.html')
+
+
+def county_index(request):
+    county_list = County.objects.all()
+    page = request.GET.get('page', 4)
+
+    query = request.GET.get("q")
+    if query:
+        county_list = county_list.filter(
+            Q(name__icontains=query) |
+            Q(code__icontains=query)
+            ).distinct()
+
+    paginator = Paginator(county_list,4)
+    try:
+        county = paginator.page(page)
+    except PageNotAnInteger:
+        county = paginator.page(1)
+    except EmptyPage:
+        county = paginator.page(paginator.num_pages)
+
+    context ={
+        "county": county 
+    }
+    return render(request, 'counties.html', context)
+
+def county_detail(request, id):
+
+    inst = get_object_or_404(County,id=id)
+    
+
+    context = {
+    "name":inst.name,
+    "inst" : inst
+    }
+    return render(request, 'county_detail.html', context)
+
+def county_create(request):
+    form = CountyForm(request.POST or None)
+    if form.is_valid():
+        inst = form.save(commit=False)
+        inst.save()
+        messages.success(request,"Successfully created a county")
+        return HttpResponseRedirect(inst.get_absolute_url())
+
+    else:
+        messages.error(request, "Not created")
+
+    context = {
+        "form" : form,
+    }
+
+    return render(request, 'county_form.html', context)
+    
+def county_update(request, id=None):
+    inst = get_object_or_404(County, id=id)
+    form = CountyForm(request.POST or None, inst=inst)
+       
+    if form.is_valid():
+        inst = form.save(commit=False)
+        inst.save()
+        messages.success(request,"Successfully updated a county")
+        return HttpResponseRedirect(inst.get_absolute_url())
+
+    else:
+        messages.error(request, "Not updated")
+
+    context = {
+        "name":inst.name,
+        "inst":inst,
+        "form" : form,
+    }
+
+    return render(request, 'county_form.html', context)
+def county_delete(request, id=None):
+    inst = get_object_or_404(County, id=id)
+    inst.delete()
+    messages.success(request, "County Deleted")
+    return render(request, 'counties.html')
+def room_index(request):
+    room_list = Room.objects.all()
+    page = request.GET.get('page', 4)
+
+    query = request.GET.get("q")
+    if query:
+        room_list = room_list.filter(
+            Q(name__icontains=query) |
+            Q(code__icontains=query)
+            ).distinct()
+
+    paginator = Paginator(county_list,4)
+    try:
+        county = paginator.page(page)
+    except PageNotAnInteger:
+        county = paginator.page(1)
+    except EmptyPage:
+        county = paginator.page(paginator.num_pages)
+
+    context ={
+        "county": county 
+    }
+    return render(request, 'counties.html', context)
+
+def county_detail(request, id):
+
+    inst = get_object_or_404(County,id=id)
+    
+
+    context = {
+    "name":inst.name,
+    "inst" : inst
+    }
+    return render(request, 'county_detail.html', context)
+
+def county_create(request):
+    form = CountyForm(request.POST or None)
+    if form.is_valid():
+        inst = form.save(commit=False)
+        inst.save()
+        messages.success(request,"Successfully created a county")
+        return HttpResponseRedirect(inst.get_absolute_url())
+
+    else:
+        messages.error(request, "Not created")
+
+    context = {
+        "form" : form,
+    }
+
+    return render(request, 'county_form.html', context)
+    
+def county_update(request, id=None):
+    inst = get_object_or_404(County, id=id)
+    form = CountyForm(request.POST or None, inst=inst)
+       
+    if form.is_valid():
+        inst = form.save(commit=False)
+        inst.save()
+        messages.success(request,"Successfully updated a county")
+        return HttpResponseRedirect(inst.get_absolute_url())
+
+    else:
+        messages.error(request, "Not updated")
+
+    context = {
+        "name":inst.name,
+        "inst":inst,
+        "form" : form,
+    }
+
+    return render(request, 'county_form.html', context)
+def county_delete(request, id=None):
+    inst = get_object_or_404(County, id=id)
+    inst.delete()
+    messages.success(request, "County Deleted")
+    return render(request, 'counties.html')
+
 
 
