@@ -93,7 +93,11 @@ class Room(models.Model):
         ('O', 'Occupied'), 
     )
     occupancy = models.CharField(max_length=1, choices=OCCUPANCY_CHOICES)
-
+    
+    def __str__(self):
+        return self.room_type
+    
+    
 class Service(models.Model):
     service_name = models.CharField(max_length=30)
     amount_charged = models.DecimalField(max_digits=6, decimal_places=2)
