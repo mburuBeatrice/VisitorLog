@@ -5,19 +5,21 @@ from django.conf.urls.static import static
 
 
 urlpatterns=[
-    # url(r'^$', views.mainpage, name='main'),
-    url(r'^$', views.index, name= 'index'),
+    url(r'^$', views.mainpage, name='main'),
+    url(r'^index$', views.index, name= 'index'),
     url(r'^create/$', views.create, name='create'),
     url(r'^(?P<id>\d+)/$',views.detail,name='detail'),
     url(r'^(?P<id>\d+)/update$',views.update,name='update'),
     url(r'^(?P<id>\d+)/delete$',views.delete,name='delete'),
+    url(r'^ajax/load_available_rooms/$', views.load_available_rooms, name='load_available_rooms'), 
     url(r'^county$', views.county_index, name= 'county'),
     url(r'^county_create/$', views.county_create, name='county_create'),
     url(r'^(?P<id>\d+)/$',views.county_detail,name='county_detail'),
     url(r'^(?P<id>\d+)/county_update$',views.county_update,name='county_update'),
     url(r'^(?P<id>\d+)/county_delete$',views.county_delete,name='county_delete'),
-    
+   
 ]
+
 
 
 if settings.DEBUG:

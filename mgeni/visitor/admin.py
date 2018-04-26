@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Visitor,County,Room,Service,Transaction
+from .models import Visitor,County,Room,Service,Transaction,Availability
 # Register your models here.
 # class VisitorModelAdmin(admin.ModelAdmin):
 #     list_display = ["name", "arrival","departure"]
@@ -10,6 +10,7 @@ from .models import Visitor,County,Room,Service,Transaction
 #     class Meta:
 #         model = Visitor
 admin.site.register(Visitor)
+admin.site.register(Availability)
 admin.site.register(County)
 admin.site.register(Room)
 admin.site.register(Service)

@@ -1,0 +1,11 @@
+{% extends 'base.html'%}
+{% load bootstrap4 %}
+{% block content%}
+{{block.super}}
+<option value=""></option>
+{% for room in rooms %}
+<option value="{{ available.pk }}">{{ available.occupancy}}</option>
+{% endfor %}
+{% endblock%}
+
+

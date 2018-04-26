@@ -34,6 +34,13 @@ class GeneratePdf(View):
              return response
          return HttpResponse("Not found")
 
+# def load_available_rooms(request):
+#     room_id = request.GET.get('room')
+#     rooms = Room.objects.filter(room_id=room_id).order_by('name')
+    
+#     return render(request, 'room_options.html', {'rooms':rooms} )
+
+
 def mainpage(request):
 
     return render(request, 'main.html')
@@ -111,6 +118,13 @@ def update(request, id=None):
     }
 
     return render(request, 'visitor_form.html', context)
+
+def load_available_rooms(request):
+    room_id = request.GET.get('room')
+    rooms = Available.objects.filter(room_id=room_id).order_by('occupancy')
+    return render(request,'room_options.html',{'rooms':rooms})
+
+
 
 def delete(request, id=None):
     instance = get_object_or_404(Visitor, id=id)

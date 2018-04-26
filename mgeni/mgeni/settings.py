@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     'visitor',
     'bootstrap4',
     'tinymce',
+    'django_select2',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

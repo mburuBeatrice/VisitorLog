@@ -9,4 +9,22 @@
     <input type="submit" value = "add a visitor" />
 
 </form>
+<!-- <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script>
+  $("#id_room").change(function () {
+    var url = $("#visitorForm").attr("data-rooms-url");  // get the url of the `load_cities` view
+    var roomId = $(this).val();  // get the selected country ID from the HTML input
+
+    $.ajax({                       // initialize an AJAX request
+      url: url,                    // set the url of the request (= localhost:8000/hr/ajax/load-cities/)
+      data: {
+        'room': roomId       // add the country id to the GET parameters
+      },
+      success: function (data) {   // `data` is the return of the `load_cities` view function
+        $("#id_room").html(data);  // replace the contents of the city input with the data that came from the server
+      }
+    });
+
+  });
+</script> -->
 {% endblock%}

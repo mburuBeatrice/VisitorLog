@@ -5,19 +5,19 @@ from django.core.urlresolvers import reverse
 # Create your models here.
 class County(models.Model):
     COUNTY_CHOICES = (
-        (1 , 'Kajiado'),
-        (10,'Marsabit'),
-        (9, 'Mandera'),
-        (8, 'Garissa'),
-        (7, 'Laikipia'),
-        (6, 'Nakuru'),
-        (4, 'Bomet'),
-        (14, 'Kirinyaga'),
+        ('1' , 'Kajiado'),
+        ('2','Marsabit'),
+        ('3', 'Mandera'),
+        ('4', 'Garissa'),
+        ('5', 'Laikipia'),
+        ('6', 'Nakuru'),
+        ('7', 'Bomet'),
+        ('8', 'Kirinyaga'),
 
 
     )
 
-    name = models.CharField(max_length = 10, choices=COUNTY_CHOICES)
+    name = models.CharField(max_length = 10,choices=COUNTY_CHOICES)
     code = models.IntegerField()
     def __str__(self):
         return self.name
@@ -44,12 +44,13 @@ class Visitor(models.Model):
         ('M', 'Male'),
         ('F', 'Female'), 
     )
-    gender = models.CharField(max_length=1, choices=GENDER_CHOICES)
+    gender = models.CharField(max_length=1, choices=GENDER_CHOICES,null=True,blank=True)
     age = models.IntegerField(null=True,blank=True)
-    county = models.ForeignKey(County,on_delete=models.CASCADE, null=True,blank=True)
+    county = models.ForeignKey('County',on_delete=models.CASCADE, null=True,blank=True)
     arrival = models.DateTimeField(auto_now=False,auto_now_add=False,null=True,blank=True)
     departure = models.DateTimeField(auto_now=False,auto_now_add=False,null=True,blank=True)
     room = models.ForeignKey('Room',on_delete=models.CASCADE, null=True,blank=True)
+    available = models.ForeignKey('Availability',on_delete=models.CASCADE, null=True,blank=True)
     service = models.ManyToManyField('Service')
 
     def __str__(self):
@@ -75,27 +76,29 @@ class Visitor(models.Model):
 class Room(models.Model):
     room_number = models.IntegerField()
     rate_per_day = models.DecimalField(max_digits=6, decimal_places=2)
-    
-    SINGLEROOM='SR'
-    DOUBLEROOM ='DR'
-    MASTERENSUITE = 'ME'
-    EXECUTIVEWING='EW'
     ROOM_CHOICES = (
-    (SINGLEROOM, 'SingleRoom'),
-    (DOUBLEROOM, 'DoubleRoom'),
-    (MASTERENSUITE, 'MasterEnsuite'),
-    (EXECUTIVEWING, 'ExecutiveWing'),
+    ('SR', 'SingleRoom'),
+    ('DR', 'DoubleRoom'),
+    ('ME', 'MasterEnsuite'),
+    ('EW', 'ExecutiveWing'),
 )
-    room_type = models.CharField(max_length=20, choices=ROOM_CHOICES,default=SINGLEROOM)
+    room_type = models.CharField(max_length=20, choices=ROOM_CHOICES)
    
+    
+    def __str__(self):
+        return self.room_type
+
+class Availability(models.Model):
     OCCUPANCY_CHOICES = (
         ('V', 'Vacant'),
         ('O', 'Occupied'), 
     )
-    occupancy = models.CharField(max_length=1, choices=OCCUPANCY_CHOICES)
-    
+ 
+    occupancy = models.CharField(max_length=1,choices=OCCUPANCY_CHOICES,default='V')
+    room = models.ForeignKey('Room',on_delete=models.CASCADE, null=True,blank=True)
     def __str__(self):
-        return self.room_type
+        return self.occupancy
+    
     
     
 class Service(models.Model):

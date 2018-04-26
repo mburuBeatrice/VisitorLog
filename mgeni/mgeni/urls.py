@@ -20,6 +20,7 @@ from visitor.views import GeneratePdf
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'',include('visitor.urls', namespace='visitor')),
-    url(r'^pdf/$', GeneratePdf.as_view(),)
+    url(r'^pdf/$', GeneratePdf.as_view(),),
+    # url(r'^select2/', include('django_select2.urls')
   
 ]
